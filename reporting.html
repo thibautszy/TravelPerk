@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>TravelPerk Reporting</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/dashboard.css" rel="stylesheet">
+		<link href="css/styles.css" rel="stylesheet">
+		<link href="css/chart.css" rel="stylesheet">
+		<link href="css/bootstrap-checkbox.css" rel="stylesheet">
+		<link href="css/bootstrap2-toggle.min.css" rel="stylesheet">
+		<link href="css/simple-sidebar.css" rel="stylesheet">
+		<link href="css/c3.css" rel="stylesheet" type="text/css">
+		<script src="js/jquery-1.8.3.min.js"></script>
+		<script src="js/jquery-1.11.3.js"></script>		
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootstrap-checkbox.js"></script>
+		<script src="js/chart.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+		<link href='https://fonts.googleapis.com/css?family=Jura:400,300,500' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Fjord+One' rel='stylesheet' type='text/css'>
+		<script src="js/c3.min.js"></script>
+		<script src="js/jquery-1.8.3.min.js"></script>
+		
+	<script>
+		$(document).ready(function() {
+			$(".dropdown-toggle").dropdown();
+			});			
+			$('.checkbox').checkbox();			
+		
+        $(document).ready(function() {
+            $('#allstates').click(function() {
+            var c = this.checked;
+            $(":checkbox").prop("checked", c);
+            });
+        });
+		
+        $(document).ready(function() {
+            $('#allstates').click(function() {
+            var c = this.checked;
+            $(":checkbox").prop("checked", c);
+            });
+        });
+    </script>
+
+	</head>
+	<body>
+		<div id="wrapper">
+			<div class="container" id="sidebar-wrapper" role="navigation">
+				<ul class="nav nav-sidebar">
+					<a href="#"><img class="brand" src="img/logo.png" width="100%"/></a>
+				</ul>
+				<ul class="nav nav-sidebar">
+					<button class="button-style">Add a Trip</button>
+				</ul>
+				<ul class="nav nav-sidebar">
+					<li><a href=""><img class="icon-menu" src="img/icon/ic_trips.png" width="18%"/><label class="category">Trips</label></a></li>
+					<li><a href=""><img class="icon-menu" src="img/icon/ic_rewards.png" width="18%"/><label class="category">Rewards</label></a></li>
+					<li><a href=""><img class="icon-menu" src="img/icon/ic_policies.png" width="18%"/><label class="category">Policies</label></a></li>
+					<li class="active"><a href=""><img class="icon-menu" src="img/icon/ic_reporting.png" width="18%"/><label class="category">Reporting</label></a></li>
+				</ul>
+			</div>
+		
+			<div id="page-content-wrapper">
+				<div class="fluid-container">
+					<!--Navbar-->
+					<nav class="navbar navbar-default">
+						<div class="container-fluid">
+							<!-- Brand and toggle get grouped for better mobile display -->
+							<div class="navbar-header">
+								<a href="#menu-toggle" class="btn btn-default button-style hidden-desktop" id="menu-toggle" style="width: 60px;">Menu</a>
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+							</div>
+
+							<!-- Collect the nav links, forms, and other content for toggling -->
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<ul class="nav navbar-nav navbar-right">
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+										<div class="user">
+											<label class="user-name">Thibaut</label>
+											<img class="avatar" width="30px" src="img/user.jpg">
+											<span class="caret"></span>
+										</div>
+										</a>
+										<ul class="dropdown-menu">
+											<li><a href="#">Settings</a></li>
+											<li><a href="#">My profile</a></li>
+											<li role="separator" class="divider"></li>
+											<li><a href="#">Log out</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div><!-- /.navbar-collapse -->
+						</div><!-- /.container-fluid -->
+					</nav><!--Navbar-->		
+				  
+					<!-- content -->
+					<div class="container">
+						<h1>Filters</h1>
+						<div class="col-xs-12 col-sm-6 col-md-3 col-lg-4 form-group departments">
+							<ul class="check-container">
+								<li><input type="checkbox" value="1" class="checkbox" id="checkAll"/>
+									<label for="checkAll">Departments</label>
+								</li>
+								<ul>
+									<li><input type="checkbox" value="1200" class="checkbox check" disabled="disabled" id="it-value"  onclick="displayITDetails()"/>IT</li>
+									<li><input type="checkbox" value="1000" class="checkbox check" disabled="disabled" id="sales-value" onclick="displaySalesDetails()"/>Sales</li>
+									<li><input type="checkbox" value="850" class="checkbox check" disabled="disabled" id="hr-value" onclick="displayHRDetails()"/>Human ressources</li>
+									<li><input type="checkbox" value="450" class="checkbox check" disabled="disabled" id="marketing-value" onclick="displayMarketingDetails()"/>Marketing</li>
+								</ul>
+							</ul>
+						</div>
+						
+						<div class="col-xs-12 col-sm-6 col-md-3 col-lg-4  form-group sub-departments">
+							<ul class="check-container">
+								<li>
+									<input type="checkbox" value="1250" class="checkbox" disabled="disabled" id="sd"/>
+									<label for="sd" id="sdvalue"><span id="nameDepartment">0</span></label>
+								</li>
+								<ul>
+									<li>
+										<input type="checkbox" value="50" class="checkbox" disabled="disabled" id="sd1-value"onclick="displaysd1Details()"/>
+										<label for="sd1" id="sd1value">subdep1</label>
+									</li>
+									<li>
+										<input type="checkbox" value="70" class="checkbox" disabled="disabled" id="sd2-value" onclick="displaysd2Details()"/>
+										<label for="sd2" id="sd2value">subdep1</label>
+									</li>
+									<li>
+										<input type="checkbox" value="0" class="checkbox" disabled="disabled" id="sd3-value" onclick="displaysd3Details()"/>
+										<label for="sd3" id="sd3value">subdep3</label>
+									</li>
+								</ul>
+							</ul>
+						</div>
+						
+						<div class="col-xs-12 col-sm-6 col-md-3 col-lg-4  form-group employees">
+							<ul class="check-container">
+							<li>
+								<input type="checkbox" value="1200" class="checkbox" disabled="disabled" id="select-all-employee"/>Employees
+							</li>
+							<ul>
+								<li>
+									<input type="checkbox" value="50" class="checkbox" disabled="disabled" id="e1" name="employee1-value"/>
+									<label for="e1" id="e1value">employee1</label>
+								</li>
+								<li>
+									<input type="checkbox" value="50" class="checkbox" disabled="disabled" id="e2" name="employee2-value"/>
+									<label for="e1" id="e2value">employee2</label>
+								</li>
+								<li>
+									<input type="checkbox" value="50" class="checkbox" disabled="disabled" id="e3" name="employee3-value"/>
+									<label for="e3" id="e3value">employee3</label>
+								</li>
+								<li>
+									<input type="checkbox" value="50" class="checkbox" disabled="disabled" id="e4" name="employee4-value"/>
+									<label for="e4" id="e4value">employee4</label>
+								</li>
+							</ul>
+							</ul>
+						</div>	
+					</div>
+				
+					<div class="container">
+
+					<h1>My trip overview</h1>
+					<div class="row">
+						<div class="col-sm-4 col-md-4 data-1 plane">
+							<p class="data"><span id="tripNumber">0</span></p>
+						</div>
+						<div class="col-sm-4 col-md-4 data-1 hotel">
+							<p class="data"><span id="hotelNumber">0</span></p>
+						</div>
+						<div class="col-sm-4 col-md-4 data-1 car">
+							<p class="data"><span id="carNumber">0</span></p>
+						</div>
+					</div>
+					
+					<div class="row total">
+						<div class="col-xs-12 col-sm-6 col-md-3 col-lg-4 data-2">
+							<div class="infog">
+								<p class="words">IN</p>
+								<p class="price data"><span id="totalTripsNumber">0</span><br/><span class="legend">trips</span></p>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-3 col-lg-4 data-2">
+							<div class="infog">
+								<p class="words">YOU spent</p>
+								<p class="price data"><span id="totalCostValue">0</span>€<br/><span class="legend"></span></p>
+							</div>
+						</div>
+						<div class="col-xs-10 col-sm-6 col-md-3 col-lg-4 data-2">
+							<div class="infog">
+								<p class="words">For</p>
+								<p class="price data"><span class="legend">a total budget of</span><br/><span id="totalSaveValue">0</span>€</p>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row saves">
+						<div class="col-xs-11 col-sm-6 col-md-3 col-lg-4 col-md-offset-1 data-1 save1 data">
+							<p class="legend">You made your company save</p>
+							<label class="data" style="font-size: 82px;"><span id="moneySaveValue">0</span>€</label>
+						</div>
+						<div class="col-xs-11 col-sm-6 col-md-3 col-lg-4 data-1 save2 data">
+							<p class="legend">They repay you</p>
+							<label class="data" style="font-weight: 500;"><span id="moneyRepaidValue">0</span>€</label>
+						</div>
+					</div>
+					</div>
+				
+					<div class="container" style="padding-bottom: 50px;">
+						<h1>Annual balance</h1>
+						<div class="buttons-graphs">
+							<button class="costs" onclick="costsshow()">Costs</button>
+							<button class="saved" onclick="savesshow()">Saves</button>
+							<button class="all" onclick="allshow()">All</button>
+						</div>
+						<div class="chart-container">
+							<div id="chart"></div>
+						</div>
+					</div>
+				</div><!--/main-->
+			</div>
+		</div><!--/.container-->
+	</div><!-- wrapper-->
+				
+<script type="text/javascript">
+/*Fill values*/
+	var inputs = document.getElementsByClassName('checkbox'),
+        tripNumber  = document.getElementById('tripNumber');
+        hotelNumber = document.getElementById('hotelNumber');
+		carNumber = document.getElementById('carNumber');
+		totalTripsNumber = document.getElementById('totalTripsNumber');
+		totalCostValue = document.getElementById('totalCostValue');
+		totalSaveValue = document.getElementById('totalSaveValue');
+		moneySaveValue = document.getElementById('moneySaveValue');
+		moneyRepaidValue = document.getElementById('moneyRepaidValue');
+/*Modify values*/
+	for (var i=0; i < inputs.length; i++) {
+		inputs[i].onchange = function() {
+			var add = this.value * (this.checked ? 1 : -1);
+			tripNumber.innerHTML = parseFloat(tripNumber.innerHTML) + add;
+			if(tripNumber<0) tripNumber=0;
+            hotelNumber.innerHTML = parseFloat(hotelNumber.innerHTML) + add;
+			if(hotelNumber<0) hotelNumber=0;
+			carNumber.innerHTML = parseFloat(carNumber.innerHTML) + add;
+			if(carNumber<0) carNumber=0;
+			
+			totalTripsNumber.innerHTML = parseFloat(totalTripsNumber.innerHTML) + add;
+			if(totalTripsNumber<0) totalTripsNumber=0;
+            totalCostValue.innerHTML = parseFloat(totalCostValue.innerHTML) + add;
+			if(totalCostValue<0) totalCostValue=0;
+			totalSaveValue.innerHTML = parseFloat(totalSaveValue.innerHTML) + add;
+			if(totalSaveValue<0) totalSaveValue=0;
+			
+			moneySaveValue.innerHTML = parseFloat(moneySaveValue.innerHTML) + add;
+			if(moneySaveValue<0) moneySaveValue=0;
+            moneyRepaidValue.innerHTML = parseFloat(moneyRepaidValue.innerHTML) + add;
+			if(moneyRepaidValue<0) moneyRepaidValue=0;
+        }
+    }
+	
+/* Charts*/	
+		var chart = c3.generate({
+		bindto: '#chart',
+		data: {
+		x: 'x',
+			columns: [
+			['x', '2014-11-01', '2014-12-01', '2015-01-01', '2015-02-01', '2015-03-01', '2015-04-01', '2015-05-01', '2015-06-01', '2015-07-01', '2015-08-01', '2015-09-01', '2015-15-01'],
+			['Budget', 3800, 2060, 4500, 4000, 6800, 1000, 3300, 2000, 1070, 540, 3400, 7500],
+			['Saved money', 200, 60, 1997, 600, 755, 235, 453, 691, 70, 10, 10, 1811],
+			['Repaid', 50, 15, 499, 150, 188, 58, 113, 172, 17, 2, 2, 452],
+			['Cost', 3600, 2000, 2503, 3400, 6045, 765, 2847, 1309, 1000, 530, 3390, 5689]
+		  ]
+		},
+		axis: {
+		x : {
+				type : 'timeseries',
+				tick: {
+					format: function (x) { return x.getMonth() + "/" + x.getFullYear(); }
+				  //format: '%Y' // format string is also available for timeseries data
+				}
+			},
+		  y: {
+			label: { // ADD
+			  text: 'Amount €',
+			  position: 'outer-middle'
+			}
+		  }
+		}
+		});
+
+/*Display values*/
+	function costsshow(){
+	chart.hide(['Saved money', 'Repaid']);
+	chart.show(['Budget', 'Cost']);
+	}
+
+	function savesshow(){
+	chart.show(['Saved money', 'Repaid']);
+	chart.hide(['Budget', 'Cost']);
+	}
+
+	function allshow(){
+	chart.show(['Budget', 'Cost', 'Saved money', 'Repaid']);
+	}
+
+	/*Checkbox actions*/
+	$('input[type="checkbox"]').checkbox('click'); // change input's state
+	$('input[type="checkbox"]').checkbox('toggleEnabled'); // change input's enabled
+	/*Checkbox actions*/
+
+/* Checkbox options*/
+$('input[type="checkbox"]').checkbox({
+      buttonStyle: 'btn-link',
+      buttonStyleChecked: 'btn-inverse',
+      checkedClass: 'fa fa-check',
+      uncheckedClass: 'fa fa-square-o',
+      defaultState: false,
+      defaultEnabled: true,
+	  
+      checked: false,
+      enabled: true
+    });	
+	
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+	
+	/*Details form*/
+	function displayITDetails() {
+		$('.sub-departments').show();
+		var checkboxvar = document.getElementById('it-value');
+		var sd = document.getElementById('sdvalue');
+		var sd1 = document.getElementById('sd1value');
+		var sd2 = document.getElementById('sd2value');
+		var sd3 = document.getElementById('sd3value');
+		if (!checkboxvar.checked) {
+			sd1.innerHTML = "subdep1";
+			sd2.innerHTML = "subdep2";
+			sd3.innerHTML = "subdep3";
+			console.log(labelvar);
+		}
+		else {
+			sd.innerHTML = "IT"
+			sd1.innerHTML = "Frontend";
+			sd2.innerHTML = "Backend";
+			sd3.innerHTML = "Analytics";
+		}
+	}
+
+	function displaySalesDetails() {
+		$('.sub-departments').show();
+		var checkboxvar = document.getElementById('sales-value');
+		var sd = document.getElementById('sdvalue');
+		var sd1 = document.getElementById('sd1value');
+		var sd2 = document.getElementById('sd2value');
+		var sd3 = document.getElementById('sd3value');
+		if (!checkboxvar.checked) {
+			sd1.innerHTML = "subdep1";
+			sd2.innerHTML = "subdep2";
+			sd3.innerHTML = "subdep3";
+		}
+		else {
+			sd.innerHTML = "Sales"
+			sd1.innerHTML = "Accounting";
+			sd2.innerHTML = "Logistic";
+			sd3.innerHTML = "Export";
+		}
+	}
+
+	function displayHRDetails() {
+		$('.sub-departments').show();
+		var checkboxvar = document.getElementById('hr-value');
+		var sd = document.getElementById('sdvalue');
+		var sd1 = document.getElementById('sd1value');
+		var sd2 = document.getElementById('sd2value');
+		var sd3 = document.getElementById('sd3value');
+		if (!checkboxvar.checked) {
+			sd1.innerHTML = "subdep1";
+			sd2.innerHTML = "subdep2";
+			sd3.innerHTML = "subdep3";
+			console.log(labelvar);
+		}
+		else {
+			sd.innerHTML = "HR"
+			sd1.innerHTML = "Management";
+			sd2.innerHTML = "Recruiting";
+			sd3.innerHTML = "Team building";
+		}
+	}
+
+	function displayMarketingDetails() {
+		$('.sub-departments').show();
+		var checkboxvar = document.getElementById('marketing-value');
+		var sd1 = document.getElementById('sd1value');
+		var sd2 = document.getElementById('sd2value');
+		var sd3 = document.getElementById('sd3value');
+		if (!checkboxvar.checked) {
+			sd1.innerHTML = "subdep1";
+			sd2.innerHTML = "subdep2";
+			sd3.innerHTML = "subdep3";
+			console.log(labelvar);
+		}
+		else {
+			var sd = document.getElementById('sdvalue');
+			sd.innerHTML = "Marketing"
+			sd1.innerHTML = "Statistics";
+			sd2.innerHTML = "Strategy";
+			sd3.innerHTML = "Partnerships";
+		}
+	}
+		
+	function displaysd1Details() {
+		$('.employees').show();
+		var checkboxvar = document.getElementById('sd1-value');
+		var e1 = document.getElementById('e1value');
+		var e2 = document.getElementById('e2value');
+		var e3 = document.getElementById('e3value');
+		var e4 = document.getElementById('e4value');
+		if (!checkboxvar.checked) {
+			e1.innerHTML = "employee1";
+			e2.innerHTML = "employee2";
+			e3.innerHTML = "employee3";
+			e4.innerHTML = "employee4";
+		}
+		else {
+			e1.innerHTML = "Sergio Myler";
+			e2.innerHTML = "Jan Toro";
+			e3.innerHTML = "Javier Haywayrd";
+			e4.innerHTML = "Ron Meir";
+		}
+	}
+
+	function displaysd2Details() {
+		$('.employees').show();
+		var checkboxvar = document.getElementById('sd2-value');
+		var e1 = document.getElementById('e1value');
+		var e2 = document.getElementById('e2value');
+		var e3 = document.getElementById('e3value');
+		var e4 = document.getElementById('e4value');
+		if (!checkboxvar.checked) {
+			e1.innerHTML = "employee1";
+			e2.innerHTML = "employee2";
+			e3.innerHTML = "employee3";
+			e4.innerHTML = "employee4";
+		}
+		else {
+			e1.innerHTML = "Sergio Toro";
+			e2.innerHTML = "Jan Myler";
+			e3.innerHTML = "Javier Meir";
+			e4.innerHTML = "Ron Haywayrd";
+		}
+	}
+
+	function displaysd3Details() {
+		$('.employees').show();
+		var checkboxvar = document.getElementById('sd3-value');
+		var e1 = document.getElementById('e1value');
+		var e2 = document.getElementById('e2value');
+		var e3 = document.getElementById('e3value');
+		var e4 = document.getElementById('e4value');
+		if (!checkboxvar.checked) {
+			e1.innerHTML = "employee1";
+			e2.innerHTML = "employee2";
+			e3.innerHTML = "employee3";
+			e4.innerHTML = "employee4";
+		}
+		else {
+			e1.innerHTML = "Javier Myler";
+			e2.innerHTML = "Ron Toro";
+			e3.innerHTML = "Sergio Haywayrd";
+			e4.innerHTML = "Jan Meir";
+		}
+	}
+	</script>
+				
+	<!-- script references -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/scripts.js"></script>
+		<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+	</body>
+</html>

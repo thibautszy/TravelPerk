@@ -1,0 +1,83 @@
+.info-chart {
+  position: relative;
+}
+
+.info-chart rect:hover {
+	fill: #33ADBC;
+}
+
+.chart-container{
+	height: 400px;
+	margin-top: 35px;
+}
+
+.tooltip {
+	position: absolute;
+	width: 120px;
+	height: auto;
+	padding: 10px;
+	background-color: #000;
+	pointer-events: none;
+}
+
+
+.tooltip-left:before {
+	content: "";
+	position:absolute;
+	bottom: 11px;
+	right: -8px;
+	border-left: 8px solid #000;
+	border-top: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+	border-right: 0;
+}
+
+.tooltip-right:before {
+	content: "";
+	position:absolute;
+	bottom: 11px;
+	left: -8px;
+	border-right: 8px solid #000;
+	border-top: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+	border-left: 0;
+}
+
+
+.tooltip.hidden {
+	display: none;
+}
+
+.tooltip p {
+	margin: 0;
+	color: #fff;
+	font-family: sans-serif;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+.months th{
+	margin-left: 2%;
+	margin-right: 2%;
+}
+
+.costs, .saved, .all{
+	background-color: #2196f3;
+	color: white;
+	border-radius: 2px;
+	border: none;
+	width: 100px;
+	height: 35px;
+}
+
+.buttons-graphs{
+	padding-bottom: 30px;
+}
+
+#chart .c3-line-Cost{
+	stroke-width: 3px;
+}
+
+#chart .c3-line-Repaid{
+	stroke-width: 4px;
+}
